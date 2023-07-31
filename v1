@@ -1,0 +1,281 @@
+import javax.swing.*;
+
+public class Main {
+    public static void main(String[] args) {
+        int[] ataqueLeve  = new int[3];
+        int[] ataquePesado  = new int[3];
+        int[] defesa  = new int[3];
+        int[] cura  = new int[3];
+        int[] dado = new int[2];
+        int[] escolha = new int[2];
+        int entrada = 0;
+        int confirmar = 0;
+        String[] classePlayer = new String[2];
+
+
+
+        // 0 == guerreiro
+        // 1 == mago
+        // 2 == arqueiro
+
+
+        //guerreiro
+        ataqueLeve[0] = 8;
+        ataquePesado[0] = 16;
+        defesa[0] = 8;
+        cura[0] = 10;
+        //mago
+        ataqueLeve[1] = 12;
+        ataquePesado[1] = 24;
+        defesa[1] = 4;
+        cura[1] = 10;
+        //arqueiro
+        ataqueLeve[2] = 10;
+        ataquePesado[2] = 20;
+        defesa[2] = 6;
+        cura[2] = 10;
+
+
+        //bem vindo
+        for(int i = 0; i <= 1; ++i) {
+            entrada = 0;
+            if (i == 0) {
+                JOptionPane.showMessageDialog(null, "======================\n|   Bem vindo a RPG DUEL   |\n =====================");
+            }
+            while ((entrada < 1) || (entrada > 3) || (confirmar == 1)) {
+                entrada = Integer.parseInt(JOptionPane.showInputDialog("Player " + (i + 1) + "\nEscolha sua classe: \n[1] Guerreiro.\n[2] Mago.\n[3] Arqueiro."));
+                confirmar = 1;
+                if (entrada == 1) {
+                    confirmar = JOptionPane.showConfirmDialog(null,  "                            [1]  Guerreiro:\n [?] Guerreiros são exímios lutadores marciais\n sempre prontos para o combate.\nDano:          [40.0]      Ataque leve:       " + ataqueLeve[0]+ " DMG\nDefesa:      [4.00]      Ataque Pesado: " + ataquePesado[0] + " DMG\nVida:           [50.0]      Bloqueio:             " + defesa[0] + " DEF\nMana:         [3.00]      Cura:                    " + cura[0] + " HP" , "Confirmação" , JOptionPane.YES_NO_OPTION);
+                    escolha[i] = 0;
+                    if (i == 0) {
+                        classePlayer[i] = "Guerreiro";
+                    }
+
+                    else {
+                        classePlayer[i] = "Guerreiro";
+                    }
+                }
+                else if (entrada == 2) {
+                    confirmar = JOptionPane.showConfirmDialog(null,  "                            [2]  Mago:\n [?] Magos são mestres das artes místicas.\nDano:          [60.0]      Ataque leve:       " + ataqueLeve[1]+ " DMG\nDefesa:      [2.00]      Ataque Pesado: " + ataquePesado[1] + " DMG\nVida:           [50.0]      Bloqueio:             " + defesa[1] + " DEF\nMana:         [3.00]      Cura:                    " + cura[1] + " HP" , "Confirmação" , JOptionPane.YES_NO_OPTION);
+                    escolha[i] = 1;
+                    if (i == 1) {
+                        classePlayer[i] = "Mago";
+                    }
+                    else {
+                        classePlayer[i] = "Mago";
+                    }
+                }
+                else if (entrada == 3) {
+                    confirmar = JOptionPane.showConfirmDialog(null,  "                            [3]  Arqueiro:\n [?] Caçadores letais a longa distância,\n se adaptam a qualquer tipo de situação. \nDano:          [50.0]      Ataque leve:       " + ataqueLeve[2]+ " DMG\nDefesa:      [3.00]      Ataque Pesado: " + ataquePesado[2] + " DMG\nVida:           [50.0]      Bloqueio:             " + defesa[2] + " DEF\nMana:         [3.00]      Cura:                    " + cura[2] + " HP" , "Confirmação" , JOptionPane.YES_NO_OPTION);
+                    escolha[i] = 2;
+                    if (i == 1) {
+                        classePlayer[i] = "Arqueiro";
+                    }
+                    else {
+                        classePlayer[i] = "Arqueiro";
+                    }
+                }
+            }
+
+
+        }
+        //fim bem vindo
+        int[] vidaPlayer = new int [2];
+        int[] manaPlayer = new int [2];
+        int[] danoTotal = new int [2];
+        int[] danoRecebido = new int [2];
+        int fimJogo = 0;
+        int jogadasEsteRound = 0;
+        int round = 1;
+
+        for(int i = 0; i <= 1; ++i) {
+            vidaPlayer[i] = 50;
+        }
+
+        JOptionPane.showMessageDialog(null,"Round [ " + round + " ]");
+
+        while  (fimJogo == 0) {
+
+
+            for(int i = 0; i <= 1; ++i) {
+
+                if (fimJogo == 1) {
+                    break;
+                }
+
+                entrada = 0;
+
+                confirmar = 1;
+                if (jogadasEsteRound >= 2) {
+                    round += 1;
+                    JOptionPane.showMessageDialog(null, "Round [ " + round + " ].");
+                }
+
+                if (i == 0) {
+                    danoRecebido[0] = danoTotal[1];
+                    manaPlayer[0] += 3;
+                    danoTotal[0] = 0;
+                    if (danoRecebido[1] > 0);
+                    vidaPlayer[1] -= danoRecebido[1];
+                }
+                if (i == 1) {
+                    danoRecebido[1] = danoTotal[0];
+                    manaPlayer[1] += 3;
+                    danoTotal[1] = 0;
+                    if (danoRecebido[0] > 0);
+                    vidaPlayer[0] -= danoRecebido[0];
+                }
+                while (entrada != 5) {
+                    entrada = Integer.parseInt(JOptionPane.showInputDialog("Player " + (i + 1) + "          Classe: " + classePlayer[i] + "\nVida: " + vidaPlayer[i] + "          Mana: " + manaPlayer[i] + "\nDano Total: " + danoTotal[i] + "\nDano Recebido: " + danoRecebido[i] + "\n[1] Ataque Leve: " + ataqueLeve[escolha[i]] + " DMG | 2 MANA.\n[2] Ataque Pesado: " + ataquePesado[escolha[i]] + " DMG | 4 MANA.\n[3] Defender: +" + defesa[escolha[i]] + " PROTEÇÃO | 1 MANA.\n[4] Curar. +" + cura[escolha[i]] + " VIDA | 3 MANA.\n[5] Finalizar Round."));
+                    switch (entrada) {
+                        case 1:
+                            if (manaPlayer[i] >= 2) {
+                                JOptionPane.showMessageDialog(null, "Girando dado...");
+                                dado[i] = (int) (1 + Math.random() * (10 - 1));
+                                if ((dado[i] >= 1) && (dado[i] <= 3)) {
+                                    manaPlayer[i] -= 2;
+                                    danoTotal[i] += ataqueLeve[escolha[i]] / 2;
+                                    JOptionPane.showMessageDialog(null, "Você desequilibra ao atacar,\nseu ataque da metade do dano.");
+                                } else if (((dado[0] >= 4) && (dado[0] <= 8))) {
+                                    manaPlayer[i] -= 2;
+                                    danoTotal[i] += ataqueLeve[escolha[i]];
+                                    JOptionPane.showMessageDialog(null, "Um ataque normal...");
+                                } else {
+                                    manaPlayer[i] -= 2;
+                                    danoTotal[i] += ataqueLeve[escolha[i]] + (ataqueLeve[escolha[i]] / 2);
+                                    JOptionPane.showMessageDialog(null, "Ataque crítico!\nSeu ataque da 50% a mais de dano.");
+                                }
+                            } else {
+                                JOptionPane.showMessageDialog(null, "Você NÃO tem mana suficiente para realizar essa ação.");
+                            }
+                            break;
+                        case 2:
+                            if (manaPlayer[i] >= 4) {
+                                JOptionPane.showMessageDialog(null, "Girando dado...");
+                                dado[i] = (int) (1 + Math.random() * (10 - 1));
+                                if ((dado[i] >= 1) && (dado[i] <= 2)) {
+                                    manaPlayer[i] -= 4;
+                                    danoTotal[i] += ataquePesado[escolha[i]] / 2;
+                                    JOptionPane.showMessageDialog(null, "Você desequilibra ao atacar,\nseu ataque causa metade do dano.");
+                                } else if (((dado[i] >= 3) && (dado[i] <= 8))) {
+                                    manaPlayer[i] -= 4;
+                                    danoTotal[i] += ataquePesado[escolha[i]];
+                                    JOptionPane.showMessageDialog(null, "Um ataque normal...");
+                                } else {
+                                    manaPlayer[i] -= 4;
+                                    danoTotal[i] += ataquePesado[escolha[i]] + (ataquePesado[escolha[i]] / 2);
+                                    JOptionPane.showMessageDialog(null, "Ataque crítico!\nSeu ataque da 50% a mais de dano.");
+                                }
+                            } else {
+                                JOptionPane.showMessageDialog(null, "Você NÃO tem mana suficiente para realizar essa ação.");
+                            }
+                            break;
+                        case 3:
+                            if ((manaPlayer[i] >= 1) && (danoRecebido[i] > 0)) {
+                                JOptionPane.showMessageDialog(null, "Rodando dado...");
+                                dado[i] = (int) (1 + Math.random() * (10 - 1));
+                                if (dado[i] == 1) {
+                                    manaPlayer[i] -= 1;
+                                    danoRecebido[i] -= defesa[escolha[i]] / 2;
+                                    JOptionPane.showMessageDialog(null, "Dado: [" + dado[i] + "]\nVocê perde a postura e não consegue\n defender parte do dano.\nVocê bloqueia [" + (defesa[escolha[i]] / 2) + "] de dano.");
+                                } else if (((dado[i] >= 2) && (dado[i] <= 8))) {
+                                    manaPlayer[i] -= 1;
+                                    danoRecebido[i] -= defesa[escolha[i]];
+                                    JOptionPane.showMessageDialog(null, "Você bloqueia [" + defesa[escolha[i]] + "] de dano.");
+                                } else {
+                                    manaPlayer[i] = 1;
+                                    danoRecebido[i] -= defesa[escolha[i]] + (defesa[escolha[i]] / 2);
+                                    JOptionPane.showMessageDialog(null, "Dado: [" + dado[i] + "]\nVocê bloqueia graciosamente [" + (defesa[escolha[i]] + (defesa[escolha[i]] / 2)) + "] de dano.");
+                                }
+
+                            } else if ((danoRecebido[i] == 0) && (manaPlayer[i] >= 1)) {
+                                confirmar = JOptionPane.showConfirmDialog(null, "Você não recebeu nenhum dano, portanto nada vai acontecer...\nUtilizar mesmo assim?\n", "Confirmação", JOptionPane.YES_NO_OPTION);
+                                if (confirmar == 1) {
+                                    break;
+                                } else {
+                                    if (manaPlayer[i] >= 1) {
+                                        manaPlayer[i] -= 1;
+                                        JOptionPane.showMessageDialog(null, "Você se protege... mas nada acontece.");
+                                    }
+                                    else {
+                                        JOptionPane.showMessageDialog(null,"Você não tem mana suficente.");
+                                    }
+                                }
+                            } else {
+                                JOptionPane.showMessageDialog(null, "Você NÃO tem mana suficiente para realizar essa ação.");
+                            }
+                            if (danoRecebido[i] < 0) {
+                                danoRecebido[i] = 0;
+                            }
+                            break;
+                        case 4:
+                            if ((manaPlayer[i] >= 3) && (vidaPlayer[i] == 50)) {
+                                confirmar = JOptionPane.showConfirmDialog(null, "Você não recebeu nenhum dano, portanto nada vai acontecer...\nUtilizar mesmo assim?\n", "Confirmação", JOptionPane.YES_NO_OPTION);
+                                if (confirmar == 1) {
+                                    break;
+                                } else {
+                                    if (manaPlayer[i] >= 3) {
+                                        manaPlayer[i] -= 3;
+                                        JOptionPane.showMessageDialog(null, "Você tenta se regenerar... mas sua vida já estava no máximo.");
+                                    }
+                                    else {
+                                        JOptionPane.showMessageDialog(null,"Você não tem mana o suficiente para lançar o feitiço.");
+                                    }
+                                }
+
+                            } else if ((manaPlayer[i] >= 3) && (vidaPlayer[i] < 50)) {
+                                JOptionPane.showMessageDialog(null, "Rodando dado...");
+                                dado[i] = (int) (1 + Math.random() * (10 - 1));
+                                if (dado[i] == 1) {
+                                    manaPlayer[i] -= 3;
+                                    vidaPlayer[i] += cura[escolha[0] / 2];
+                                    JOptionPane.showMessageDialog(null, "Dado: [" + dado[i] + "]\nVocê se desconcentra e não consegue\n curar parte do dano.\nVocê cura [" + (cura[escolha[i] / 2]) + "] de vida.");
+                                } else if (((dado[i] >= 2) && (dado[i] <= 8))) {
+                                    manaPlayer[i] -= 3;
+                                    vidaPlayer[i] += cura[escolha[0]];
+                                    JOptionPane.showMessageDialog(null, "Dado: [" + dado[i] + "]\nVocê cura [" + cura[escolha[i]] + "] de vida.");
+                                } else {
+                                    manaPlayer[i] -= 3;
+                                    vidaPlayer[i] += cura[escolha[i]] + (cura[escolha[i]] / 2);
+                                    JOptionPane.showMessageDialog(null, "Dado: [" + dado[i] + "]\nVocê se restaura graciosamente [" + (cura[escolha[i]] + (cura[escolha[i]] / 2)) + "] de cura.");
+                                }
+
+                            }
+                            else  {
+                                JOptionPane.showMessageDialog(null,"Você NÃO tem mana suficiente para realizar essa ação.");
+                            }
+
+                            if (vidaPlayer[i] > 50) {
+                                vidaPlayer[i] = 50;
+                            }
+                            break;
+                        case 5:
+                            JOptionPane.showMessageDialog(null, "Finalizando...");
+                            jogadasEsteRound += 1;
+                            if ((vidaPlayer[0] <= 0) || (vidaPlayer[1] <= 0)) {
+                                fimJogo = 1;
+                                JOptionPane.showMessageDialog(null,"Fim de jogo!");
+                                break;
+                            }
+                            break;
+                        default:
+                            JOptionPane.showMessageDialog(null, "Por favor, selecione uma opção entre [1] e [5]");
+                    }
+                }
+
+                }
+            }
+
+        if ((vidaPlayer[0] <= 0) && (vidaPlayer[1] <= 0)) {
+            JOptionPane.showMessageDialog(null,"Empate!");
+        }
+        else if ((vidaPlayer[0] <= 0) && (vidaPlayer[1] > 0)) {
+            JOptionPane.showMessageDialog(null,"Vencedor: Player 2!");
+        }
+        else {
+            JOptionPane.showMessageDialog(null,"Vencedor: Player 1!");
+        }
+
+        }
+    }
